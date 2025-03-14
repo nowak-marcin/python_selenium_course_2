@@ -1,3 +1,5 @@
+import time
+
 from src.locators.timetableLocators import TimetableLocators
 from src.commons.seleniumHelpers import SeleniumHelpers
 
@@ -24,9 +26,14 @@ class TimetablePage(TimetableLocators):
         self.SeleniumHelpers.wait_and_click_2(self.DIRECT_SLC)
 
     def select_train_operators(self):
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANY)
+        time.sleep(10)
         self.SeleniumHelpers.wait_and_click_2(self.COMPANY_DESELECT_ALL)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY_1)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY_2)
+        time.sleep(10)
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANY1)
+        time.sleep(10)
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANY2)
+
 
     def click_search_connection(self):
         self.SeleniumHelpers.wait_and_click(self.SEARCH_BTN)
