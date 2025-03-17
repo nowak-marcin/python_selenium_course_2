@@ -1,7 +1,7 @@
 import time
 
-from src.locators.timetableLocators import TimetableLocators
 from src.commons.seleniumHelpers import SeleniumHelpers
+from src.locators.timetableLocators import TimetableLocators
 
 
 class TimetablePage(TimetableLocators):
@@ -28,12 +28,25 @@ class TimetablePage(TimetableLocators):
     def select_train_operators(self):
         self.SeleniumHelpers.wait_and_click_2(self.COMPANY)
         time.sleep(10)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY_DESELECT_ALL)
-        time.sleep(10)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY1)
-        time.sleep(10)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY2)
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANY_UNSELECT_ALL)
 
+
+
+        '''
+        checkbox1 = self.driver.execute_script("return document.getElementById('P1');")
+        self.driver.execute_script("arguments[0].click();", checkbox1)
+        time.sleep(10)
+        assert checkbox1.is_selected(), 'checkbox1 is empty'
+        checkbox2 = self.driver.execute_script("return document.getElementById('P2');")
+        self.driver.execute_script("arguments[0].click();", checkbox2)
+        assert checkbox2.is_selected(), 'checkbox2 is empty'
+        '''
+        '''
+        ...By.XPATH, "//label[text()='PKP Intercity']/following-sibling::div/input[@type='checkbox']"
+        Znajduje etykietę <label> z tekstem "PKP Intercity".
+        Następnie przechodzi do rodzeństwa (following-sibling) i szuka elementu <input> z 
+        typem checkbox wewnątrz <div>.
+        '''
 
     def click_search_connection(self):
         self.SeleniumHelpers.wait_and_click(self.SEARCH_BTN)

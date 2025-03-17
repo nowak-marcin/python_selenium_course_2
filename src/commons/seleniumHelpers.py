@@ -20,21 +20,15 @@ class SeleniumHelpers:
         self.wait.until(
             EC.visibility_of_element_located(locator)).send_keys(text)
 
-    def find_and_click_elements(self, locator):
-        elements = self.driver.find_elements(locator)
-        for element in elements:
-            element[0].click()
-            element[1].click()
+    def click_checkbox(self, locator):
+        checkbox = self.wait.until(
+            EC.presence_of_element_located(locator))
+        if not checkbox.is_selected():
+            checkbox.click()
+        assert checkbox.is_selected(), 'empty checkbox'
 
     def wait_and_get_text(self, locator):
         element = self.wait.until(
             EC.visibility_of_element_located(locator))
         element_text = element.text
-
         return element_text
-
-    def scroll_to_element_and_click(self, locator):
-        element = self.driver.findElement(locator)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-        element.click()
-

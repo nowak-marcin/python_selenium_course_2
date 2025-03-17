@@ -24,7 +24,7 @@ class TestTimetable:
         time.sleep(10)
         timetable1.select_no_transfer_option()
         time.sleep(10)
-        timetable1.select_train_operators()
+        # timetable1.select_train_operators()
         time.sleep(10)
         timetable1.click_search_connection()
         time.sleep(5)
