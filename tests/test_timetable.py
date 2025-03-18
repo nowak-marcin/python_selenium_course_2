@@ -7,12 +7,13 @@ from src.pages.timetablePage import TimetablePage
 station_from = 'Szczecin Główny'
 station_to = 'Gryfino'
 hour = '1500'
+train_type = 'regional and tlk trains'
 
 
 @pytest.mark.usefixtures('setup')
 class TestTimetable:
 
-    def test_from_to_tomorrow_input_hour_direct(self):
+    def test_tc_001(self):
 
         timetable1 = TimetablePage(self.driver)
         timetable1.input_from_station(station_from)
@@ -24,7 +25,8 @@ class TestTimetable:
         time.sleep(10)
         timetable1.select_no_transfer_option()
         time.sleep(10)
-        # timetable1.select_train_operators()
+        timetable1.deselect_type_of_train(train_type)
+        timetable1.select_train_operators()
         time.sleep(10)
         timetable1.click_search_connection()
         time.sleep(5)

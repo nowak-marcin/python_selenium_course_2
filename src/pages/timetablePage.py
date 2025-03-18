@@ -25,10 +25,24 @@ class TimetablePage(TimetableLocators):
     def select_no_transfer_option(self):
         self.SeleniumHelpers.wait_and_click_2(self.DIRECT_SLC)
 
+    def deselect_type_of_train(self, train_type):
+        self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
+        if train_type == "express and fast trains only":
+            self.SeleniumHelpers.wait_and_click_2(self.REG)
+            self.SeleniumHelpers.wait_and_click_2(self.TLK)
+        if train_type == "regional and tlk trains":
+            self.SeleniumHelpers.wait_and_click_2(self.FAST)
+            self.SeleniumHelpers.wait_and_click_2(self.EX)
+
     def select_train_operators(self):
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY)
-        time.sleep(10)
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANIES)
+        time.sleep(5)
         self.SeleniumHelpers.wait_and_click_2(self.COMPANY_UNSELECT_ALL)
+        time.sleep(5)
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANY1)
+        time.sleep(5)
+        self.SeleniumHelpers.wait_and_click_2(self.COMPANY2)
+        time.sleep(5)
 
 
 
@@ -40,8 +54,7 @@ class TimetablePage(TimetableLocators):
         checkbox2 = self.driver.execute_script("return document.getElementById('P2');")
         self.driver.execute_script("arguments[0].click();", checkbox2)
         assert checkbox2.is_selected(), 'checkbox2 is empty'
-        '''
-        '''
+        ---
         ...By.XPATH, "//label[text()='PKP Intercity']/following-sibling::div/input[@type='checkbox']"
         Znajduje etykietę <label> z tekstem "PKP Intercity".
         Następnie przechodzi do rodzeństwa (following-sibling) i szuka elementu <input> z 

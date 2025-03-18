@@ -27,8 +27,12 @@ class SeleniumHelpers:
             checkbox.click()
         assert checkbox.is_selected(), 'empty checkbox'
 
-    def wait_and_get_text(self, locator):
+    def wait_element_and_get_text(self, locator):
         element = self.wait.until(
             EC.visibility_of_element_located(locator))
         element_text = element.text
         return element_text
+
+    def wait_elements_and_verify_text(self, locator, your_text):
+        pass
+
