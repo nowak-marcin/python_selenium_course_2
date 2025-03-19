@@ -1,6 +1,7 @@
 import time
 
 from src.commons.seleniumHelpers import SeleniumHelpers
+from src.commons.javaScriptHelpers import JavaScriptHelpers
 from src.locators.timetableLocators import TimetableLocators
 
 
@@ -9,6 +10,7 @@ class TimetablePage(TimetableLocators):
     def __init__(self, driver):
         self.driver = driver
         self.SeleniumHelpers = SeleniumHelpers(self.driver)
+        self.JavaScriptHelpers = JavaScriptHelpers(self.driver)
 
     def input_from_station(self, station_from):
         self.SeleniumHelpers.wait_and_input_text(self.STATION_FROM, station_from)
@@ -28,20 +30,20 @@ class TimetablePage(TimetableLocators):
     def deselect_type_of_train(self, train_type):
         self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
         if train_type == "express and fast trains only":
-            self.SeleniumHelpers.wait_and_click_2(self.REG)
-            self.SeleniumHelpers.wait_and_click_2(self.TLK)
+            self.SeleniumHelpers.click_checkbox(self.REG)
+            self.SeleniumHelpers.click_checkbox(self.TLK)
         if train_type == "regional and tlk trains":
-            self.SeleniumHelpers.wait_and_click_2(self.FAST)
-            self.SeleniumHelpers.wait_and_click_2(self.EX)
+            self.SeleniumHelpers.click_checkbox(self.FAST)
+            self.SeleniumHelpers.click_checkbox(self.EX)
 
     def select_train_operators(self):
         self.SeleniumHelpers.wait_and_click_2(self.COMPANIES)
         time.sleep(5)
         self.SeleniumHelpers.wait_and_click_2(self.COMPANY_UNSELECT_ALL)
         time.sleep(5)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY1)
+        self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY1, self.CM1_ONCLICK)
         time.sleep(5)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY2)
+        self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY2, self.CM2_ONCLICK)
         time.sleep(5)
 
 

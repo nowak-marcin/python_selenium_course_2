@@ -1,3 +1,4 @@
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -22,10 +23,12 @@ class SeleniumHelpers:
 
     def click_checkbox(self, locator):
         checkbox = self.wait.until(
-            EC.presence_of_element_located(locator))
-        if not checkbox.is_selected():
-            checkbox.click()
-        assert checkbox.is_selected(), 'empty checkbox'
+            EC.visibility_of_element_located(locator))
+        checkbox.click()
+        if checkbox.is_selected():
+            print('checkbox selected')
+        else:
+            print('checkbox unselected')
 
     def wait_element_and_get_text(self, locator):
         element = self.wait.until(

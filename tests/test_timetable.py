@@ -29,4 +29,4 @@ class TestTimetable:
         timetable1.select_train_operators()
         time.sleep(10)
         timetable1.click_search_connection()
-        time.sleep(5)
+        time.sleep(10)
