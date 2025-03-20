@@ -25,7 +25,7 @@ class TimetablePage(TimetableLocators):
         self.SeleniumHelpers.wait_and_input_text(self.HOUR, hour)
 
     def select_no_transfer_option(self):
-        self.SeleniumHelpers.wait_and_click_2(self.DIRECT_SLC)
+        self.JavaScriptHelpers.select_checkbox_from_keyboard(self.DIRECT_SLC)
 
     def deselect_type_of_train(self, train_type):
         self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
@@ -45,23 +45,6 @@ class TimetablePage(TimetableLocators):
         time.sleep(5)
         self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY2, self.CM2_ONCLICK)
         time.sleep(5)
-
-
-
-        '''
-        checkbox1 = self.driver.execute_script("return document.getElementById('P1');")
-        self.driver.execute_script("arguments[0].click();", checkbox1)
-        time.sleep(10)
-        assert checkbox1.is_selected(), 'checkbox1 is empty'
-        checkbox2 = self.driver.execute_script("return document.getElementById('P2');")
-        self.driver.execute_script("arguments[0].click();", checkbox2)
-        assert checkbox2.is_selected(), 'checkbox2 is empty'
-        ---
-        ...By.XPATH, "//label[text()='PKP Intercity']/following-sibling::div/input[@type='checkbox']"
-        Znajduje etykietę <label> z tekstem "PKP Intercity".
-        Następnie przechodzi do rodzeństwa (following-sibling) i szuka elementu <input> z 
-        typem checkbox wewnątrz <div>.
-        '''
 
     def click_search_connection(self):
         self.SeleniumHelpers.wait_and_click(self.SEARCH_BTN)

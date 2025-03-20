@@ -39,3 +39,19 @@ class SeleniumHelpers:
     def wait_elements_and_verify_text(self, locator, your_text):
         pass
 
+
+'''
+        checkbox1 = self.driver.execute_script("return document.getElementById('P1');")
+        self.driver.execute_script("arguments[0].click();", checkbox1)
+        time.sleep(10)
+        assert checkbox1.is_selected(), 'checkbox1 is empty'
+        checkbox2 = self.driver.execute_script("return document.getElementById('P2');")
+        self.driver.execute_script("arguments[0].click();", checkbox2)
+        assert checkbox2.is_selected(), 'checkbox2 is empty'
+        ---
+        ...By.XPATH, "//label[text()='PKP Intercity']/following-sibling::div/input[@type='checkbox']"
+        Znajduje etykietę <label> z tekstem "PKP Intercity".
+        Następnie przechodzi do rodzeństwa (following-sibling) i szuka elementu <input> z 
+        typem checkbox wewnątrz <div>.
+'''
+

@@ -8,7 +8,7 @@ class TimetableLocators:
     TOMORROW_BTN = (By.CSS_SELECTOR, "img[alt='Dzień później']")
     HOUR = (By.ID, 'hour')
 
-    DIRECT_SLC = (By.XPATH, "//span[contains(text(),'Połączenia bezpośrednie')]")
+    DIRECT_SLC = (By.ID, "directCheckbox")
 
     ADVANCED = (By.XPATH, "//span[normalize-space()='Zaawansowane:']")
     REG = (By.XPATH, "//span[normalize-space()='Regio/Osobowe']")
@@ -18,7 +18,8 @@ class TimetableLocators:
 
     COMPANIES = (By.XPATH, "//span[contains(text(),'Wybór przewoźnika:')]")
     COMPANY_UNSELECT_ALL = (By.CSS_SELECTOR, ".first.ac")
-    # checkbox z opacity: 0 (= hidden):
+
+    # checkbox z opacity: 0 (= hidden) i handle:
     COMPANY1 = (By.ID, 'P1')
     CM1_ONCLICK = "handleServiceProviderCheckbox('P1')"
     COMPANY2 = (By.ID, 'P2')
