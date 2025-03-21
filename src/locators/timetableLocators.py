@@ -19,7 +19,7 @@ class TimetableLocators:
     COMPANIES = (By.XPATH, "//span[contains(text(),'Wybór przewoźnika:')]")
     COMPANY_UNSELECT_ALL = (By.CSS_SELECTOR, ".first.ac")
 
-    # checkbox z opacity: 0 (= hidden) i handle:
+    # - checkbox with opacity:0 (= hidden, not clickable) and js event (handle):
     COMPANY1 = (By.ID, 'P1')
     CM1_ONCLICK = "handleServiceProviderCheckbox('P1')"
     COMPANY2 = (By.ID, 'P2')

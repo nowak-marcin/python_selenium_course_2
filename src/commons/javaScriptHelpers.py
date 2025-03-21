@@ -19,17 +19,17 @@ class JavaScriptHelpers:
         self.driver = driver
 
     def select_checkbox_from_keyboard(self, locator, onclick_method=None):
-        # find element, unpack tuple (By, <locator>) to 2 arguments By and <locator>:
+        # - find element, unpack tuple (By, <locator>) to 2 arguments By and <locator>:
         checkbox = self.driver.find_element(*locator)
-        # post SPACE into checkbox (select or deselect element from keyboard simulation):
+        # - post SPACE into checkbox (select or deselect element from keyboard simulation):
         # self.driver.execute_script("arguments[0].click();", checkbox)
         checkbox.send_keys(Keys.SPACE)
-        # use JS function, to change element and start after-click events (if exist):
+        # - use JS function, to change element and start after-click events (if exist):
         if not onclick_method:
             pass
         else:
             self.driver.execute_script(onclick_method)
-        # refresh changes:
+        # - refresh changes:
         self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'));", checkbox)
         if checkbox.is_selected():
             print('checkbox selected')
