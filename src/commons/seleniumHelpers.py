@@ -36,8 +36,10 @@ class SeleniumHelpers:
         element_text = element.text
         return element_text
 
-    def wait_elements_and_verify_text(self, locator, your_text):
-        pass
+    def find_elements_from_table(self, locator):
+        elements = self.driver.find_elements(*locator)
+        return elements
+
 
 
 '''

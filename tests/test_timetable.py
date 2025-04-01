@@ -2,6 +2,7 @@ import time
 import pytest
 
 from src.pages.timetablePage import TimetablePage
+from src.pages.resultsPage import ResultsPage
 
 # @pytest.fixture(autouse=True):
 # - function with this fixture (decorator) will be used in all tests in class,
@@ -20,6 +21,7 @@ class TestTimetable:
     @pytest.fixture(autouse=True)
     def timetable_objects(self):
         self.timetable = TimetablePage(self.driver)
+        self.results = ResultsPage(self.driver)
 
     def test_tc_001(self):
 
@@ -36,4 +38,18 @@ class TestTimetable:
         self.timetable.select_train_operators()
         time.sleep(10)
         self.timetable.click_search_connection()
+        time.sleep(10)
+        self.results.close_banner()
+        time.sleep(10)
+        self.results.scroll_to_table()
+        time.sleep(10)
+        self.results.results_station_from()
+        time.sleep(5)
+        # print(elements)
+        # assert all(result_from.text == station_from[0] for result_from in elements), "result station is not equal to selected station"
+        self.results.results_station_to()
+        time.sleep(5)
+        # print(elements)
+        # assert all(result_to.text == station_to[0] for result_to in elements), "result station is not equal to selected station"
+        self.results.buy_ticket_button()
         time.sleep(10)

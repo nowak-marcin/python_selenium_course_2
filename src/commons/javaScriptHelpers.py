@@ -36,6 +36,7 @@ class JavaScriptHelpers:
         else:
             print('checkbox unselected')
 
-    def scroll_to_end_of_page(self):
-        self.driver.execute_script("window.scrollTo(0,document.documentElement.scrollHeight)")
+    def scroll_to_element(self, locator):
+        element = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView(true)", element)
         time.sleep(5)
