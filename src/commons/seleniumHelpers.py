@@ -41,7 +41,6 @@ class SeleniumHelpers:
         return elements
 
 
-
 '''
         checkbox1 = self.driver.execute_script("return document.getElementById('P1');")
         self.driver.execute_script("arguments[0].click();", checkbox1)

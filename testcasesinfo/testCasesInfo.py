@@ -8,7 +8,7 @@
 - select type of train - REGIO & TLK
 - select operator - POLREGIO & PKP INTERCITY
 - click search
-- list of available trains - check if station and other data are correct
+- buy REGIO ticket
 #-----------------------------------------------------------------------------
 PASSED[100%]
 checkbox selected
@@ -18,9 +18,12 @@ checkbox selected
 checkbox selected
 Szczecin Główny (4x)
 Gryfino (4x)
-REG options: 3
-TLK/IC options: 1
-selected: REG, buy ticket
+current date +1 (4x)
+0 (4x)
+REG ticket options: > 1
+TLK/IC ticket options: >= 0
+selected first: REG - buy ticket
+PASSED
 END TESTING SESSION
 """
 #==============================================================================

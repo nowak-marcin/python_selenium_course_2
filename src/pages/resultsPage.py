@@ -1,5 +1,3 @@
-from time import sleep
-
 from src.commons.javaScriptHelpers import JavaScriptHelpers
 from src.locators.resultsPageLocators import ResultsPageLocators
 from src.commons.seleniumHelpers import SeleniumHelpers
@@ -18,22 +16,38 @@ class ResultsPage(ResultsPageLocators):
     def scroll_to_table(self):
         self.JavaScriptHelpers.scroll_to_element(self.TABLE)
 
-    def results_station_from(self):
+    def results_station_from(self, expected_text):
         elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_FROM)
         for element in elements:
             element_text = element.text
-            print(element_text)
+            assert element_text == expected_text, 'result station_to is not equal to selected station'
+            print(element_text, end=",")
 
-    def results_station_to(self):
+    def results_station_to(self, expected_text):
         elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_TO)
         for element in elements:
             element_text = element.text
-            print(element_text)
+            assert element_text == expected_text, 'result station_to is not equal to selected station'
+            print(element_text, end=",")
+
+    def results_day(self):
+        elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_DATES)
+        for element in elements:
+            element_text = element.text
+            # assert element_text == expected_text, 'result day is not equal to selected day'
+            print(element_text, end=",")
+
+    def results_directs(self, expected_text):
+        elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_DIRECTS)
+        for element in elements:
+            element_text = element.text
+            assert element_text == expected_text, 'wrong directs counts'
+            print(element_text, end=",")
 
     def buy_ticket_button(self):
         elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
-        print('REG options:', len(elements1))
+        print('REG ticket options:', len(elements1))
         elements2 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
-        print('TLK/IC options:', len(elements2))
+        print('TLK/IC ticket options:', len(elements2))
         self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
-        print('selected: REG, buy ticket')
+        print('selected first: REG - buy ticket')
