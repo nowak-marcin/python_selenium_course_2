@@ -1,5 +1,8 @@
 import time
+from datetime import timedelta, datetime
+
 import pytest
+from pycparser.ply.ctokens import t_COMMA
 
 from src.pages.timetablePage import TimetablePage
 from src.pages.resultsPage import ResultsPage
@@ -14,6 +17,11 @@ station_to = ['Gryfino']
 hour = ['1500']
 train_type = ['regional and tlk trains', 'express and fast trains']
 direct = ['0']
+today_day = datetime.now()
+add_day = today_day + timedelta(days=1)
+today_day_str = today_day.strftime('%d.%m.%y')
+tomorrow_day = add_day.strftime('%d.%m.%y')
+
 
 
 @pytest.mark.usefixtures('setup')
@@ -46,11 +54,9 @@ class TestTimetable:
         time.sleep(5)
         self.results.results_station_from(station_from[0])
         time.sleep(5)
-        # print(elements)
-        # assert all(result_from.text == station_from[0] for result_from in elements), "result station is not equal to selected station"
         self.results.results_station_to(station_to[0])
         time.sleep(5)
-        self.results.results_day()
+        self.results.results_day(tomorrow_day)
         time.sleep(5)
         self.results.results_directs(direct[0])
         time.sleep(5)
