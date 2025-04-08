@@ -2,10 +2,10 @@ import time
 from datetime import timedelta, datetime
 
 import pytest
-from pycparser.ply.ctokens import t_COMMA
 
 from src.pages.timetablePage import TimetablePage
 from src.pages.resultsPage import ResultsPage
+from src.commons.databaseHelpers import DatabaseHelpers
 
 # @pytest.fixture(autouse=True):
 # - function with this fixture (decorator) will be used in all tests in class,
@@ -31,6 +31,7 @@ class TestTimetable:
     def timetable_objects(self):
         self.timetable = TimetablePage(self.driver)
         self.results = ResultsPage(self.driver)
+        self.database = DatabaseHelpers()
 
     def test_tc_001(self):
 
@@ -48,8 +49,7 @@ class TestTimetable:
         time.sleep(5)
         self.timetable.click_search_connection()
         time.sleep(5)
-        self.results.close_banner()
-        time.sleep(5)
+        # self.results.close_banner()
         self.results.scroll_to_table()
         time.sleep(5)
         self.results.results_station_from(station_from[0])
@@ -62,3 +62,10 @@ class TestTimetable:
         time.sleep(5)
         self.results.buy_ticket_button()
         time.sleep(10)
+        self.database.insert_test_order_data()
+        time.sleep(10)
+        self.database.select_test_order_data()
+        time.sleep(10)
+        self.database.clear_order_and_close_connection()
+        time.sleep(5)
+

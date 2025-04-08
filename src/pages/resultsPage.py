@@ -37,7 +37,7 @@ class ResultsPage(ResultsPageLocators):
         for element in elements:
             element_text = element.text
             assert element_text == expected_text, 'result day is not equal to selected day'
-            print("\n",element_text, end=",")
+            print(element_text, end=",")
         print("\n")
 
     def results_directs(self, expected_text):
