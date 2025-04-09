@@ -62,10 +62,12 @@ class TestTimetable:
         time.sleep(5)
         self.results.buy_ticket_button()
         time.sleep(10)
-        self.database.insert_test_order_data()
+        # simulation of creating order in db via BE/API:
+        self.database.insert_test_order_data(station_from[0], station_to[0])
         time.sleep(10)
-        self.database.select_test_order_data()
-        time.sleep(10)
-        self.database.clear_order_and_close_connection()
+        # check order data in db:
+        self.database.select_test_order_data(station_from[0], station_to[0])
         time.sleep(5)
+        # self.database.clear_order_and_close_connection()
+
 
