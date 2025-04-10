@@ -1,3 +1,4 @@
+
 from src.commons.javaScriptHelpers import JavaScriptHelpers
 from src.locators.resultsPageLocators import ResultsPageLocators
 from src.commons.seleniumHelpers import SeleniumHelpers
@@ -38,6 +39,14 @@ class ResultsPage(ResultsPageLocators):
             element_text = element.text
             assert element_text == expected_text, 'result day is not equal to selected day'
             print(element_text, end=",")
+        print("\n")
+
+    def results_hours(self, expected_value):
+        elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_HOURS)
+        for element in elements:
+            element_text = int(element.text.replace(":", ""))
+            assert element_text >= expected_value - 100, 'hours is easier than expected'
+            print(str(element_text), end=",")
         print("\n")
 
     def results_directs(self, expected_text):

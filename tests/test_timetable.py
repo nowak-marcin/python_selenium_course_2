@@ -14,14 +14,13 @@ from src.commons.databaseHelpers import DatabaseHelpers
 
 station_from = ['Szczecin Główny']
 station_to = ['Gryfino']
-hour = ['1500']
+hour = [1500]
 train_type = ['regional and tlk trains', 'express and fast trains']
 direct = ['0']
 today_day = datetime.now()
 add_day = today_day + timedelta(days=1)
 today_day_str = today_day.strftime('%d.%m.%y')
 tomorrow_day = add_day.strftime('%d.%m.%y')
-
 
 
 @pytest.mark.usefixtures('setup')
@@ -57,6 +56,8 @@ class TestTimetable:
         self.results.results_station_to(station_to[0])
         time.sleep(5)
         self.results.results_day(tomorrow_day)
+        time.sleep(5)
+        self.results.results_hours(hour[0])
         time.sleep(5)
         self.results.results_directs(direct[0])
         time.sleep(5)
