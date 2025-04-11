@@ -29,10 +29,10 @@ class TimetablePage(TimetableLocators):
 
     def deselect_type_of_train(self, train_type):
         self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
-        if train_type == "express and fast trains":
+        if train_type == train_type[1]:
             self.SeleniumHelpers.click_checkbox(self.REG)
             self.SeleniumHelpers.click_checkbox(self.TLK)
-        if train_type == "regional and tlk trains":
+        if train_type == train_type[0]:
             self.SeleniumHelpers.click_checkbox(self.FAST)
             self.SeleniumHelpers.click_checkbox(self.EX)
 
