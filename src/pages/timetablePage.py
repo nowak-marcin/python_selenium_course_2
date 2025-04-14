@@ -29,12 +29,16 @@ class TimetablePage(TimetableLocators):
 
     def deselect_type_of_train(self, train_type):
         self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
+        time.sleep(5)
         if train_type == train_type[1]:
-            self.SeleniumHelpers.click_checkbox(self.REG)
-            self.SeleniumHelpers.click_checkbox(self.TLK)
+            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.REG)
+            time.sleep(5)
+            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.TLK)
         if train_type == train_type[0]:
-            self.SeleniumHelpers.click_checkbox(self.FAST)
-            self.SeleniumHelpers.click_checkbox(self.EX)
+            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.FAST)
+            time.sleep(5)
+            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.EX)
+        time.sleep(5)
 
     def select_train_operators(self):
         self.SeleniumHelpers.wait_and_click_2(self.COMPANIES)

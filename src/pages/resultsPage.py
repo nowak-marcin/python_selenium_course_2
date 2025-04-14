@@ -43,6 +43,7 @@ class ResultsPage(ResultsPageLocators):
 
     def results_hours(self, expected_value):
         elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_HOURS)
+        # counter helps remove 1 result (2 hours) before expected hour:
         counter = 0
         for element in elements:
             counter +=1
@@ -61,6 +62,16 @@ class ResultsPage(ResultsPageLocators):
             print(element_text, end=",")
         print('\n')
 
+    def count_results(self):
+        elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
+        print('REG ticket options:', len(elements1))
+        elements2 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
+        print('TLK/IC ticket options:', len(elements2))
+
+    def buy_ticket_regional(self):
+        self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
+        print('selected first option: REG - buy ticket')
+
     def buy_ticket_button(self, train_type):
         elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
         len_elements1 = len(elements1)
@@ -70,23 +81,15 @@ class ResultsPage(ResultsPageLocators):
         print('TLK/IC ticket options:', len_elements2)
         if train_type == train_type[0]:
             if len_elements1 > 0:
-                self.SeleniumHelpers.wait_and_click_2(self.ALL_REG_BUY_BTN)
+                self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
                 print('selected first option: REG - buy ticket')
             elif len_elements2 > 0:
-                self.SeleniumHelpers.wait_and_click_2(self.ALL_TLK_BUY_BTN)
+                self.SeleniumHelpers.wait_and_click(self.ALL_TLK_BUY_BTN)
                 print('selected first option: TLK/IC - buy ticket')
             else:
                 print('tickets result for REGIO and TLK/IC train is empty')
         if train_type == train_type[1]:
             print('in progress !!!')
-
-    def buy_ticket_button_2(self):
-        elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
-        print('REG ticket options:', len(elements1))
-        elements2 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
-        print('TLK/IC ticket options:', len(elements2))
-        self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
-        print('selected first option: REG - buy ticket')
 
     def open_ticket_page_and_get_title(self):
         carts = self.driver.window_handles

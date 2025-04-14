@@ -31,6 +31,7 @@ class JavaScriptHelpers:
             self.driver.execute_script(onclick_method)
         # - refresh changes:
         self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'));", checkbox)
+        time.sleep(5)
         if checkbox.is_selected():
             print('checkbox selected')
         else:
