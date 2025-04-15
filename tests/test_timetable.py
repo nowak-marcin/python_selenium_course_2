@@ -32,27 +32,26 @@ class TestTimetable:
         self.results = ResultsPage(self.driver)
         self.database = DatabaseHelpers()
 
-    def test_tc_001(self):
+    def test_tomorrow_regional(self):
 
         self.timetable.input_from_station(station_from[0])
-        self.timetable.input_to_station(station_to[1])
+        self.timetable.input_to_station(station_to[0])
         self.timetable.select_tomorrow()
         self.timetable.input_hour(hour[0])
         time.sleep(5)
         self.timetable.select_no_transfer_option()
         time.sleep(10)
-        self.timetable.deselect_type_of_train(train_type[0])
+        self.timetable.deselect_type_of_train(train_type, train_type[0])
         time.sleep(10)
-        self.timetable.select_train_operators()
+        self.timetable.select_operators(station_to, station_to[0])
         time.sleep(10)
         self.timetable.click_search_connection()
         time.sleep(5)
-        # self.results.close_banner()
         self.results.scroll_to_table()
         time.sleep(5)
         self.results.results_station_from(station_from[0])
         time.sleep(5)
-        self.results.results_station_to(station_to[1])
+        self.results.results_station_to(station_to[0])
         time.sleep(5)
         self.results.results_day(tomorrow_day)
         time.sleep(5)
@@ -67,10 +66,10 @@ class TestTimetable:
         self.results.open_ticket_page_and_get_title()
         time.sleep(5)
         # simulation of creating order in db via BE/API:
-        self.database.insert_test_order_data(station_from[0], station_to[1])
+        self.database.insert_test_order_data(station_from[0], station_to[0])
         time.sleep(5)
         # check order data in db:
-        self.database.select_test_order_data(station_from[0], station_to[1])
+        self.database.select_test_order_data(station_from[0], station_to[0])
         time.sleep(5)
         # self.database.clear_order_and_close_connection()
 

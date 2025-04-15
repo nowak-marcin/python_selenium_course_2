@@ -11,10 +11,10 @@ class TimetableLocators:
     DIRECT_SLC = (By.ID, "directCheckbox")
 
     ADVANCED = (By.XPATH, "//span[normalize-space()='Zaawansowane:']")
-    REG = (By.ID, "product_0_3")
-    TLK = (By.ID, "product_0_2")
-    EX = (By.ID, "product_0_1")
-    FAST = (By.ID, "product_0_0")
+    REG = (By.XPATH, "//span[normalize-space()='Regio/Osobowe']")
+    TLK = (By.XPATH, "//span[normalize-space()='IC/TLK/IR/RE/D/Posp.']")
+    EX = (By.XPATH, "//span[normalize-space()='EIP/EIC/EC/IC/Ex']")
+    FAST = (By.XPATH, "//span[contains(text(),'Koleje dużych prędkości')]")
 
     COMPANIES = (By.XPATH, "//span[contains(text(),'Wybór przewoźnika:')]")
     COMPANY_UNSELECT_ALL = (By.CSS_SELECTOR, ".first.ac")

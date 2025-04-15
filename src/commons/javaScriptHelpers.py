@@ -32,10 +32,13 @@ class JavaScriptHelpers:
         # - refresh changes:
         self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'));", checkbox)
         time.sleep(5)
-        if checkbox.is_selected():
-            print('checkbox selected')
-        else:
-            print('checkbox unselected')
+
+    def deselect_checkbox_with_helpers(self, locator):
+        checkbox = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].checked = false;", checkbox)
+        time.sleep(5)
+        self.driver.execute_script("arguments[0].dispatchEvent(new Event('change'));", checkbox)
+        time.sleep(5)
 
     def scroll_to_element(self, locator):
         element = self.driver.find_element(*locator)

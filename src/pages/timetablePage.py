@@ -27,28 +27,28 @@ class TimetablePage(TimetableLocators):
     def select_no_transfer_option(self):
         self.JavaScriptHelpers.select_checkbox_from_keyboard(self.DIRECT_SLC)
 
-    def deselect_type_of_train(self, train_type):
+    def deselect_type_of_train(self, train_type, target_type):
         self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
-        time.sleep(5)
-        if train_type == train_type[1]:
-            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.REG)
-            time.sleep(5)
-            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.TLK)
-        if train_type == train_type[0]:
-            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.FAST)
-            time.sleep(5)
-            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.EX)
+        if target_type == train_type[1]:
+            self.SeleniumHelpers.wait_and_click_2(self.REG)
+            self.SeleniumHelpers.wait_and_click_2(self.TLK)
+        elif target_type == train_type[0]:
+            self.SeleniumHelpers.wait_and_click_2(self.FAST)
+            self.SeleniumHelpers.wait_and_click_2(self.EX)
+        else:
+            pass
         time.sleep(5)
 
-    def select_train_operators(self):
+    def select_operators(self, station_to, target_station):
         self.SeleniumHelpers.wait_and_click_2(self.COMPANIES)
-        time.sleep(5)
         self.SeleniumHelpers.wait_and_click_2(self.COMPANY_UNSELECT_ALL)
-        time.sleep(5)
-        self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY1, self.CM1_ONCLICK)
-        time.sleep(5)
-        self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY2, self.CM2_ONCLICK)
-        time.sleep(5)
+        if target_station == station_to[0]:
+            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY1, self.CM1_ONCLICK)
+            time.sleep(5)
+            self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY2, self.CM2_ONCLICK)
+            time.sleep(5)
+        else:
+            print("in progress")
 
     def click_search_connection(self):
         self.SeleniumHelpers.wait_and_click(self.SEARCH_BTN)
