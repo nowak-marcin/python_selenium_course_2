@@ -8,6 +8,8 @@ class TimetableLocators:
     TOMORROW_BTN = (By.CSS_SELECTOR, "img[alt='Dzień później']")
     HOUR = (By.ID, 'hour')
 
+    BANNER_BELOW = (By.CSS_SELECTOR, '.anchor_close')
+
     DIRECT_SLC = (By.ID, "directCheckbox")
 
     ADVANCED = (By.XPATH, "//span[normalize-space()='Zaawansowane:']")

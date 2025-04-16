@@ -19,10 +19,6 @@ def setup(request):
     time.sleep(5)
     # -- close privacy-policy-banner:
     driver.find_element('xpath', '//div[2]/div/button[2]').click()
-    time.sleep(5)
-    # -- close info-banner (bottom of the page):
-    driver.find_element('css selector', '.anchor_close').click()
-    time.sleep(5)
     # -- use driver in test-class:
     request.cls.driver = driver
     # request.cls.wait = wait

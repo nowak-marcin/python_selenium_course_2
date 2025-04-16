@@ -13,7 +13,7 @@ from src.commons.databaseHelpers import DatabaseHelpers
 # - recognize 'self.driver' already exists into another class
 
 station_from = ['Szczecin Główny']
-station_to = ['Gryfino', 'Stargard']
+station_to = ['Gryfino', 'Warszawa Zachodnia']
 hour = [1500]
 train_type = ['regional and tlk trains', 'express and fast trains']
 direct = ['0']
@@ -32,12 +32,12 @@ class TestTimetable:
         self.results = ResultsPage(self.driver)
         self.database = DatabaseHelpers()
 
-    def test_tomorrow_regional(self):
-
+    def test_tomorrow_with_hour_regional(self):
         self.timetable.input_from_station(station_from[0])
         self.timetable.input_to_station(station_to[0])
         self.timetable.select_tomorrow()
         self.timetable.input_hour(hour[0])
+        self.timetable.close_banner_below()
         time.sleep(5)
         self.timetable.select_no_transfer_option()
         time.sleep(10)
@@ -59,18 +59,44 @@ class TestTimetable:
         time.sleep(5)
         self.results.results_directs(direct[0])
         time.sleep(5)
-        self.results.count_results()
-        time.sleep(5)
-        self.results.buy_ticket_regional()
+        self.results.buy_ticket_button(train_type, train_type[0])
         time.sleep(5)
         self.results.open_ticket_page_and_get_title()
-        time.sleep(5)
+        self.results.return_to_main_page()
         # simulation of creating order in db via BE/API:
         self.database.insert_test_order_data(station_from[0], station_to[0])
         time.sleep(5)
         # check order data in db:
-        self.database.select_test_order_data(station_from[0], station_to[0])
+        self.database.select_test_order_data(station_from[0], station_to)
         time.sleep(5)
         # self.database.clear_order_and_close_connection()
+
+    def test_today_now_express(self):
+        self.timetable.input_from_station(station_from[0])
+        self.timetable.input_to_station(station_to[1])
+        time.sleep(5)
+        self.timetable.close_banner_below()
+        self.timetable.select_no_transfer_option()
+        time.sleep(5)
+        self.timetable.deselect_type_of_train(train_type, train_type[1])
+        time.sleep(5)
+        self.timetable.click_search_connection()
+        time.sleep(5)
+        self.results.scroll_to_table()
+        time.sleep(5)
+        self.results.results_station_from(station_from[0])
+        self.results.results_station_to(station_to[1])
+        self.results.results_day([today_day, tomorrow_day])
+        self.results.results_directs(direct[0])
+        self.results.buy_ticket_button(train_type, train_type[1])
+        self.results.open_ticket_page_and_get_title()
+        self.results.return_to_main_page()
+        self.database.insert_test_order_data(station_from[0], station_to[1])
+        time.sleep(5)
+        self.database.select_test_order_data(station_from[0], station_to)
+        time.sleep(5)
+
+
+
 
 

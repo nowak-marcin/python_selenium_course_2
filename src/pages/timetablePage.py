@@ -1,4 +1,7 @@
 import time
+from time import sleep
+
+from selenium.common import NoSuchElementException
 
 from src.commons.seleniumHelpers import SeleniumHelpers
 from src.commons.javaScriptHelpers import JavaScriptHelpers
@@ -11,6 +14,14 @@ class TimetablePage(TimetableLocators):
         self.driver = driver
         self.SeleniumHelpers = SeleniumHelpers(self.driver)
         self.JavaScriptHelpers = JavaScriptHelpers(self.driver)
+
+    def close_banner_below(self):
+        try:
+            self.SeleniumHelpers.wait_and_click_2(self.BANNER_BELOW)
+        except NoSuchElementException:
+            print('banner nieznaleziony na stronie')
+        finally:
+            pass
 
     def input_from_station(self, station_from):
         self.SeleniumHelpers.wait_and_input_text(self.STATION_FROM, station_from)
@@ -26,6 +37,7 @@ class TimetablePage(TimetableLocators):
 
     def select_no_transfer_option(self):
         self.JavaScriptHelpers.select_checkbox_from_keyboard(self.DIRECT_SLC)
+        time.sleep(5)
 
     def deselect_type_of_train(self, train_type, target_type):
         self.SeleniumHelpers.wait_and_click_2(self.ADVANCED)
@@ -37,18 +49,20 @@ class TimetablePage(TimetableLocators):
             self.SeleniumHelpers.wait_and_click_2(self.EX)
         else:
             pass
-        time.sleep(5)
+        sleep(5)
 
     def select_operators(self, station_to, target_station):
         self.SeleniumHelpers.wait_and_click_2(self.COMPANIES)
-        self.SeleniumHelpers.wait_and_click_2(self.COMPANY_UNSELECT_ALL)
+        time.sleep(5)
         if target_station == station_to[0]:
+            self.SeleniumHelpers.wait_and_click_2(self.COMPANY_UNSELECT_ALL)
+            time.sleep(5)
             self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY1, self.CM1_ONCLICK)
             time.sleep(5)
             self.JavaScriptHelpers.select_checkbox_from_keyboard(self.COMPANY2, self.CM2_ONCLICK)
             time.sleep(5)
         else:
-            print("in progress")
+            pass
 
     def click_search_connection(self):
         self.SeleniumHelpers.wait_and_click(self.SEARCH_BTN)

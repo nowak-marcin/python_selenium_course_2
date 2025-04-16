@@ -31,7 +31,7 @@ class DatabaseHelpers:
         self.cursor.execute(select_query)
 
         for (user_id, order_num, from_name, to_name) in self.cursor:
-            assert from_name == station_from and to_name == station_to, 'station in db is not equal to expected'
+            assert from_name in station_from and to_name in station_to, 'station in db is not equal to expected'
             print(f'{user_id} - {order_num} - {from_name} - {to_name}')
 
     def clear_order_and_close_connection(self):

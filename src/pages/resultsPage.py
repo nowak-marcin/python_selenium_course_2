@@ -37,7 +37,7 @@ class ResultsPage(ResultsPageLocators):
         elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_DATES)
         for element in elements:
             element_text = element.text
-            assert element_text == expected_text, 'result day is not equal to selected day'
+            assert element_text in expected_text, 'result day is not equal to selected day'
             print(element_text, end=",")
         print("\n")
 
@@ -72,24 +72,30 @@ class ResultsPage(ResultsPageLocators):
         self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
         print('selected first option: REG - buy ticket')
 
-    def buy_ticket_button(self, train_type):
-        elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
-        len_elements1 = len(elements1)
-        print('REG ticket options:', len_elements1)
-        elements2 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
-        len_elements2 = len(elements2)
-        print('TLK/IC ticket options:', len_elements2)
-        if train_type == train_type[0]:
-            if len_elements1 > 0:
+    def buy_ticket_button(self, train_type, target_type):
+        if target_type == train_type[0]:
+            elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
+            print('REG ticket buttons:', len(elements1))
+            elements2 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
+            print('TLK/IC ticket buttons:', len(elements2))
+            if len(elements1) > 0:
                 self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
                 print('selected first option: REG - buy ticket')
-            elif len_elements2 > 0:
+            elif len(elements2) > 0:
                 self.SeleniumHelpers.wait_and_click(self.ALL_TLK_BUY_BTN)
                 print('selected first option: TLK/IC - buy ticket')
             else:
                 print('tickets result for REGIO and TLK/IC train is empty')
-        if train_type == train_type[1]:
-            print('in progress !!!')
+        if target_type == train_type[1]:
+            elements3 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
+            print('EIC ticket buttons:', len(elements3))
+            elements4 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
+            print('EIP ticket buttons:', len(elements4))
+            if len(elements3) > 0 or len(elements4) > 0:
+                self.SeleniumHelpers.wait_and_click(self.EIC_BUY_BTN_ACTIVE)
+                print('selected active button in second row - EIC/EIP buy ticket')
+            else:
+                print('tickets result for EIC/EIP train is empty')
 
     def open_ticket_page_and_get_title(self):
         carts = self.driver.window_handles
@@ -98,3 +104,7 @@ class ResultsPage(ResultsPageLocators):
         print(f'open operator ticket page in new tab: {cart_title}')
         self.driver.close()
         self.driver.switch_to.window(carts[0])
+
+    def return_to_main_page(self):
+        self.driver.get('https://rozklad-pkp.pl/pl/')
+

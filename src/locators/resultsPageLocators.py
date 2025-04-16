@@ -13,3 +13,4 @@ class ResultsPageLocators:
     ALL_TRAIN_IMG = (By.XPATH, "//table[@id='wyniki']//tr//td[7]//img")
     ALL_REG_BUY_BTN = (By.XPATH, "//table[@id='wyniki']//tr//td[8]/a")
     ALL_TLK_BUY_BTN = (By.XPATH, "//table[@id='wyniki']//tr//td[8]/form")
+    EIC_BUY_BTN_ACTIVE = (By.XPATH, "//table[@id='wyniki']//tr[2]//td[8]//form")

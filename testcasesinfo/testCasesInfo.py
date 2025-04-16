@@ -1,4 +1,4 @@
-# TEST_TIMETABLE:
+
 """
 --------------------------------------------------------------
 tc_001
@@ -13,11 +13,16 @@ TLK/IC ticket options: >= 0
 selected first button: REG - buy ticket
 open operator ticket page in new tab: Wyniki wyszukiwania mPOLREGIO
 DB: test user - <order number> - Szczecin Główny - Gryfino
-PASSED END TESTING SESSION
-===============================================================
-"""
-"""
 --------------------------------------------------------------
 tc_002
 --------------------------------------------------------------
+Szczecin Główny,Szczecin Główny,Szczecin Główny,Szczecin Główny,
+Warszawa Zachodnia,Warszawa Zachodnia,Warszawa Zachodnia,Warszawa Zachodnia,
+16.04.25,16.04.25,17.04.25,17.04.25, -> today or tommorrow dates
+0,0,0,0,
+EIC ticket buttons: > 0
+EIP ticket buttons: >= 0
+selected active button in second row: EIC/EIP - buy ticket
+open operator ticket page in new tab: e-IC2 - Internetowa rezerwacja miejsc
+DB: test user - <order number> - Szczecin Główny - Warszawa Zachodnia
 """
