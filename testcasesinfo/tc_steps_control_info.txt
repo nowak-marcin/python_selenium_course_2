@@ -1,0 +1,38 @@
+PS C:\Users\nowak\Desktop\qa_auto_learn\python_selenium_course_2> cd .\tests\                     
+PS C:\Users\nowak\Desktop\qa_auto_learn\python_selenium_course_2\tests> pytest .\test_timetable.py -v -s
+
+==========================test session starts=======================================                                                                                                                         
+test_timetable.py::TestTimetable::test_tomorrow_with_hour_regional
+
+Szczecin Główny,Szczecin Główny,Szczecin Główny,Szczecin Główny,
+Gryfino,Gryfino,Gryfino,Gryfino,
+18.04.25,18.04.25,18.04.25,18.04.25,
+15:00,15:23,15:30,15:54,16:00,16:23,
+0,0,0,0,
+REG ticket buttons: 3
+TLK/IC ticket buttons: 1
+selected first option: REG - buy ticket
+open operator ticket page in new tab: Wyniki wyszukiwania mPOLREGIO
+
+test user - 17700 - Szczecin Główny - Gryfino
+
+PASSED
+-------------------------------------------------------------------------------------
+test_timetable.py::TestTimetable::test_today_now_express
+
+Szczecin Główny,Szczecin Główny,Szczecin Główny,Szczecin Główny,
+Warszawa Zachodnia,Warszawa Zachodnia,Warszawa Zachodnia,Warszawa Zachodnia,
+17.04.25,17.04.25,18.04.25,18.04.25,
+0,0,0,0,
+EIC ticket buttons: 1
+EIP ticket buttons: 3
+selected active button in second row - EIC/EIP buy ticket
+open operator ticket page in new tab: e-IC2 - Internetowa rezerwacja miejsc
+
+test user - 17700 - Szczecin Główny - Gryfino
+test user - 17928 - Szczecin Główny - Warszawa Zachodnia
+
+PASSED
+------------------------------------------------------------------------------------
+END TESTING SESSION
+===================2 passed in 224.44s (0:03:44)====================================

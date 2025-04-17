@@ -21,6 +21,7 @@ today = datetime.now()
 tomorrow = today + timedelta(days=1)
 today_day = today.strftime('%d.%m.%y')
 tomorrow_day = tomorrow.strftime('%d.%m.%y')
+operators_pages = ["Wyniki wyszukiwania mPOLREGIO", "e-IC2 - Internetowa rezerwacja miejsc"]
 
 
 @pytest.mark.usefixtures('setup')
@@ -61,7 +62,7 @@ class TestTimetable:
         time.sleep(5)
         self.results.buy_ticket_button(train_type, train_type[0])
         time.sleep(5)
-        self.results.open_ticket_page_and_get_title()
+        self.results.open_ticket_page_and_get_title(operators_pages[0])
         self.results.return_to_main_page()
         # simulation of creating order in db via BE/API:
         self.database.insert_test_order_data(station_from[0], station_to[0])
@@ -89,14 +90,9 @@ class TestTimetable:
         self.results.results_day([today_day, tomorrow_day])
         self.results.results_directs(direct[0])
         self.results.buy_ticket_button(train_type, train_type[1])
-        self.results.open_ticket_page_and_get_title()
+        self.results.open_ticket_page_and_get_title(operators_pages[1])
         self.results.return_to_main_page()
         self.database.insert_test_order_data(station_from[0], station_to[1])
         time.sleep(5)
         self.database.select_test_order_data(station_from[0], station_to)
         time.sleep(5)
-
-
-
-
-

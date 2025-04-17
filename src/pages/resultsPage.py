@@ -1,3 +1,4 @@
+import time
 
 from src.commons.javaScriptHelpers import JavaScriptHelpers
 from src.locators.resultsPageLocators import ResultsPageLocators
@@ -43,7 +44,7 @@ class ResultsPage(ResultsPageLocators):
 
     def results_hours(self, expected_value):
         elements = self.SeleniumHelpers.find_elements_from_table(self.ALL_HOURS)
-        # counter helps remove 1 result (2 hours) before expected hour:
+        # counter helps remove 1st result, because it is always before expected hour:
         counter = 0
         for element in elements:
             counter +=1
@@ -61,16 +62,6 @@ class ResultsPage(ResultsPageLocators):
             assert element_text == expected_text, 'wrong directs counts'
             print(element_text, end=",")
         print('\n')
-
-    def count_results(self):
-        elements1 = self.SeleniumHelpers.find_elements_from_table(self.ALL_REG_BUY_BTN)
-        print('REG ticket options:', len(elements1))
-        elements2 = self.SeleniumHelpers.find_elements_from_table(self.ALL_TLK_BUY_BTN)
-        print('TLK/IC ticket options:', len(elements2))
-
-    def buy_ticket_regional(self):
-        self.SeleniumHelpers.wait_and_click(self.ALL_REG_BUY_BTN)
-        print('selected first option: REG - buy ticket')
 
     def buy_ticket_button(self, train_type, target_type):
         if target_type == train_type[0]:
@@ -97,14 +88,16 @@ class ResultsPage(ResultsPageLocators):
             else:
                 print('tickets result for EIC/EIP train is empty')
 
-    def open_ticket_page_and_get_title(self):
+    def open_ticket_page_and_get_title(self, operator_pages):
         carts = self.driver.window_handles
         self.driver.switch_to.window(carts[1])
         cart_title = self.driver.title
+        assert cart_title in operator_pages
         print(f'open operator ticket page in new tab: {cart_title}')
         self.driver.close()
         self.driver.switch_to.window(carts[0])
 
     def return_to_main_page(self):
         self.driver.get('https://rozklad-pkp.pl/pl/')
+        time.sleep(5)
 

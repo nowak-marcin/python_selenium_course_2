@@ -19,8 +19,6 @@ class TimetablePage(TimetableLocators):
         try:
             self.SeleniumHelpers.wait_and_click_2(self.BANNER_BELOW)
         except NoSuchElementException:
-            print('banner nieznaleziony na stronie')
-        finally:
             pass
 
     def input_from_station(self, station_from):
